@@ -15,6 +15,12 @@ namespace MusicGame
         public MainMenuForm()
         {
             InitializeComponent();
+        }     
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.Show();
         }
     }
 }

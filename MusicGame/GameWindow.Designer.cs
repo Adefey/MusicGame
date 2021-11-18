@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameWindow));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.scoreHintLabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.scoreHintLabel = new System.Windows.Forms.Label();
+            this.gamePictureBox = new System.Windows.Forms.PictureBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -46,27 +48,16 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.Controls.Add(this.scoreLabel, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.scoreHintLabel, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.gamePictureBox, 0, 0);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(1904, 1041);
             this.tableLayoutPanel.TabIndex = 0;
-            // 
-            // scoreHintLabel
-            // 
-            this.scoreHintLabel.AutoSize = true;
-            this.scoreHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scoreHintLabel.Location = new System.Drawing.Point(0, 988);
-            this.scoreHintLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.scoreHintLabel.Name = "scoreHintLabel";
-            this.scoreHintLabel.Size = new System.Drawing.Size(476, 53);
-            this.scoreHintLabel.TabIndex = 2;
-            this.scoreHintLabel.Text = "Ваш счет:";
-            this.scoreHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // scoreLabel
             // 
@@ -80,15 +71,34 @@
             this.scoreLabel.Text = "0";
             this.scoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // scoreHintLabel
             // 
-            this.tableLayoutPanel.SetColumnSpan(this.pictureBox1, 4);
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1898, 982);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.scoreHintLabel.AutoSize = true;
+            this.scoreHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scoreHintLabel.Location = new System.Drawing.Point(0, 988);
+            this.scoreHintLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.scoreHintLabel.Name = "scoreHintLabel";
+            this.scoreHintLabel.Size = new System.Drawing.Size(476, 53);
+            this.scoreHintLabel.TabIndex = 2;
+            this.scoreHintLabel.Text = "Ваш счет:";
+            this.scoreHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gamePictureBox
+            // 
+            this.tableLayoutPanel.SetColumnSpan(this.gamePictureBox, 4);
+            this.gamePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gamePictureBox.Location = new System.Drawing.Point(0, 0);
+            this.gamePictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.gamePictureBox.Name = "gamePictureBox";
+            this.gamePictureBox.Size = new System.Drawing.Size(1904, 988);
+            this.gamePictureBox.TabIndex = 4;
+            this.gamePictureBox.TabStop = false;
+            this.gamePictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gamePictureBox_MouseDown);
+            // 
+            // timer
+            // 
+            this.timer.Interval = 50;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // GameWindow
             // 
@@ -97,14 +107,14 @@
             this.Controls.Add(this.tableLayoutPanel);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "GameWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameWindow";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -114,6 +124,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label scoreHintLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox gamePictureBox;
+        private System.Windows.Forms.Timer timer;
     }
 }

@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.mainMenuPictureBox = new System.Windows.Forms.PictureBox();
-            this.nameHintLabel = new System.Windows.Forms.Label();
+            this.exitButton = new System.Windows.Forms.Button();
             this.difficultyHintLabel = new System.Windows.Forms.Label();
+            this.nameHintLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.difficultyTrackBar = new System.Windows.Forms.TrackBar();
             this.playButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
+            this.mainMenuPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainMenuPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.difficultyTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainMenuPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -65,30 +66,16 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(784, 461);
             this.tableLayoutPanel.TabIndex = 0;
             // 
-            // mainMenuPictureBox
+            // exitButton
             // 
-            this.tableLayoutPanel.SetColumnSpan(this.mainMenuPictureBox, 3);
-            this.mainMenuPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainMenuPictureBox.Image = global::MusicGame.Properties.Resources.MainMenuBG;
-            this.mainMenuPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.mainMenuPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.mainMenuPictureBox.Name = "mainMenuPictureBox";
-            this.mainMenuPictureBox.Size = new System.Drawing.Size(784, 368);
-            this.mainMenuPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.mainMenuPictureBox.TabIndex = 0;
-            this.mainMenuPictureBox.TabStop = false;
-            // 
-            // nameHintLabel
-            // 
-            this.nameHintLabel.AutoSize = true;
-            this.nameHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameHintLabel.Location = new System.Drawing.Point(0, 368);
-            this.nameHintLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.nameHintLabel.Name = "nameHintLabel";
-            this.nameHintLabel.Size = new System.Drawing.Size(156, 46);
-            this.nameHintLabel.TabIndex = 1;
-            this.nameHintLabel.Text = "Введи свое имя";
-            this.nameHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exitButton.Location = new System.Drawing.Point(391, 414);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(0);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(393, 47);
+            this.exitButton.TabIndex = 6;
+            this.exitButton.Text = "Выйти";
+            this.exitButton.UseVisualStyleBackColor = true;
             // 
             // difficultyHintLabel
             // 
@@ -101,6 +88,18 @@
             this.difficultyHintLabel.TabIndex = 2;
             this.difficultyHintLabel.Text = "Выбери режим сложности";
             this.difficultyHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nameHintLabel
+            // 
+            this.nameHintLabel.AutoSize = true;
+            this.nameHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameHintLabel.Location = new System.Drawing.Point(0, 368);
+            this.nameHintLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.nameHintLabel.Name = "nameHintLabel";
+            this.nameHintLabel.Size = new System.Drawing.Size(156, 46);
+            this.nameHintLabel.TabIndex = 1;
+            this.nameHintLabel.Text = "Введи свое имя";
+            this.nameHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nameTextBox
             // 
@@ -135,16 +134,18 @@
             this.playButton.Text = "Играть!";
             this.playButton.UseVisualStyleBackColor = true;
             // 
-            // exitButton
+            // mainMenuPictureBox
             // 
-            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exitButton.Location = new System.Drawing.Point(391, 414);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(0);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(393, 47);
-            this.exitButton.TabIndex = 6;
-            this.exitButton.Text = "Выйти";
-            this.exitButton.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel.SetColumnSpan(this.mainMenuPictureBox, 3);
+            this.mainMenuPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainMenuPictureBox.Image = global::MusicGame.Properties.Resources.MainMenuBG;
+            this.mainMenuPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.mainMenuPictureBox.Name = "mainMenuPictureBox";
+            this.mainMenuPictureBox.Size = new System.Drawing.Size(784, 368);
+            this.mainMenuPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.mainMenuPictureBox.TabIndex = 0;
+            this.mainMenuPictureBox.TabStop = false;
             // 
             // MainMenuForm
             // 
@@ -152,12 +153,13 @@
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.tableLayoutPanel);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenuForm";
             this.Text = "Музыкальная игра";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainMenuPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.difficultyTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainMenuPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

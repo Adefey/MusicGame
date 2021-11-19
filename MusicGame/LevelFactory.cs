@@ -3,6 +3,7 @@
     static class LevelFactory
     {
         public static int currentLevel;
+        public static int maxLevel;
 
         public static LevelData GetLevel(int levelNum)
         {
@@ -20,7 +21,7 @@
         public static LevelData GetNext()
         {
             int n = currentLevel;
-            if (currentLevel == 5)
+            if (currentLevel == maxLevel)
             {
                 currentLevel = 1;
             }

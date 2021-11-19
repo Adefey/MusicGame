@@ -25,6 +25,7 @@ namespace MusicGame
             gfx = Graphics.FromImage(bmp);
             RedrawOctave();
             LevelFactory.currentLevel = 1;
+            LevelFactory.maxLevel = PlayerInfo.difficulty;
         }
 
         private void SetLevel(int number = 0)
@@ -49,8 +50,11 @@ namespace MusicGame
                 score += 10;
                 playerInputNum++;
             }
-            else MessageBox.Show($"Игра окончена. {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+            else
+            {
+                MessageBox.Show($"Игра окончена. {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
             RedrawOctave();
             DrawNote(pressedNote);
             PlayNote(pressedNote, 2);
@@ -63,6 +67,17 @@ namespace MusicGame
                 noteLabel.Text = "-";
             });
             scoreLabel.Text = score.ToString();
+            if (playerInputNum == currentLevel.notes.Count)
+            {
+                MessageBox.Show($"Уровень пройден", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                nextLevelButton_Click(sender, e);
+            }
+            if (playerInputNum == currentLevel.notes.Count && LevelFactory.currentLevel == LevelFactory.maxLevel)
+            {
+                MessageBox.Show($"Играй пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                Close();            
+            }
+         
         }
 
         private void RedrawOctave()
@@ -111,8 +126,7 @@ namespace MusicGame
             }
             else
             {
-                noteGeneratorTimer.Enabled = false;
-                nextLevelButton.Visible = true;
+                noteGeneratorTimer.Enabled = false;                
             }
         }
 

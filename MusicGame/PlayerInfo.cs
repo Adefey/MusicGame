@@ -19,7 +19,7 @@
         public static void SetPlayer(string newName, int newDifficulty)
         {
             name = newName;
-            difficulty = newDifficulty;
+            difficulty = newDifficulty+2;
         }
 
         public static void ForgetPlayer()

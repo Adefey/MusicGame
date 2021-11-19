@@ -8,6 +8,8 @@ namespace MusicGame
     {
         MIDIPlayer player = new MIDIPlayer();
         LevelData currentLevel;
+        int score = 0;
+        int playerInputNum = 0;
         Random random = new Random();
         Graphics gfx;
         Brush RandomBrush;
@@ -36,12 +38,18 @@ namespace MusicGame
             {
                 currentLevel = LevelFactory.GetLevel(number);
                 noteGeneratorTimer.Interval = currentLevel.delay;
-            }          
+            }
         }
 
         private void gamePictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             int pressedNote = (e.X / (bmp.Width / 7));
+            if (pressedNote == currentLevel.notes[playerInputNum])
+            {
+                score += 10;
+                playerInputNum++;
+            }
+            else MessageBox.Show($"Игра окончена. {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             RedrawOctave();
             DrawNote(pressedNote);
@@ -54,6 +62,7 @@ namespace MusicGame
                 RedrawOctave();
                 noteLabel.Text = "-";
             });
+            scoreLabel.Text = score.ToString();
         }
 
         private void RedrawOctave()
@@ -109,10 +118,11 @@ namespace MusicGame
 
         private void nextLevelButton_Click(object sender, EventArgs e)
         {
+            playerInputNum = 0;
             noteGeneratorTimer.Enabled = true;
             nextLevelButton.Visible = false;
             levelLabel.Text = LevelFactory.currentLevel.ToString();
-            SetLevel();            
+            SetLevel();
         }
     }
 }

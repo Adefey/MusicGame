@@ -7,6 +7,7 @@ namespace MusicGame
     public partial class GameWindow : Form
     {
         MIDIPlayer player = new MIDIPlayer();
+        LevelData currentLevel = LevelFactory.GetLevel(1);
         Random random = new Random();
         Graphics gfx;
         Brush RandomBrush;
@@ -20,15 +21,27 @@ namespace MusicGame
             InitializeComponent();
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
-            tickTimer.Enabled = true;
-            noteGeneratorTimer.Enabled = false;
             RedrawOctave();
+        }
+
+        private void SetLevel(int number = 0)
+        {
+            if (number == 0)
+            {
+                currentLevel = LevelFactory.GetNext();
+                noteGeneratorTimer.Interval = currentLevel.delay;
+            }
+            else
+            {
+                currentLevel = LevelFactory.GetLevel(number);
+                noteGeneratorTimer.Interval = currentLevel.delay;
+            }          
         }
 
         private void gamePictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             int pressedNote = (e.X / (bmp.Width / 7));
-            
+
             RedrawOctave();
             DrawNote(pressedNote);
             PlayNote(pressedNote, 2);
@@ -58,7 +71,7 @@ namespace MusicGame
 
         private void PlayNote(int number, int lane)
         {
-            player.Note(127, 50+number, 200, lane);
+            player.Note(127, 60 + number, 200, lane);
         }
 
         private void tickTimer_Tick(object sender, EventArgs e)
@@ -69,18 +82,36 @@ namespace MusicGame
 
         private void noteGeneratorTimer_Tick(object sender, EventArgs e)
         {
-            int note = random.Next(7);
-            RedrawOctave();
-            DrawNote(note);
-            PlayNote(note, 1);
-            noteLabel.Text = note.ToString();
-            delayTimer.Enabled = true;
-            delayTimer.Tick += new EventHandler((s, a) =>
+            int note;
+            if (LevelData.count < currentLevel.notes.Count)
             {
-                delayTimer.Enabled = false;
+                note = currentLevel.notes[LevelData.count];
+                LevelData.count++;
                 RedrawOctave();
-                noteLabel.Text = "-";
-            });
+                DrawNote(note);
+                PlayNote(note, 1);
+                noteLabel.Text = note.ToString();
+                delayTimer.Enabled = true;
+                delayTimer.Tick += new EventHandler((s, a) =>
+                {
+                    delayTimer.Enabled = false;
+                    RedrawOctave();
+                    noteLabel.Text = "-";
+                });
+            }
+            else
+            {
+                noteGeneratorTimer.Enabled = false;
+                nextLevelButton.Visible = true;
+            }
+        }
+
+        private void nextLevelButton_Click(object sender, EventArgs e)
+        {
+            noteGeneratorTimer.Enabled = true;
+            nextLevelButton.Visible = false;
+            SetLevel();
+            levelLabel.Text = LevelFactory.currentLevel.ToString();
         }
     }
 }

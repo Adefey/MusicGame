@@ -1,14 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MusicGame
 {
-    struct LevelData
+    class LevelData
     {
-        List<int> notes;
-        int delay;
+        public List<int> notes;
+        public int delay;
+        public static int count = 0;
     }
+
+    class LevelOneData : LevelData
+    {
+        public LevelOneData()
+        {
+            notes = new List<int> { 0, 5, 5, 4, 5, 3, 0, 0 }; //В лесу родилас елочка
+            delay = 450;
+            count = 0;
+        }
+    }
+
+    class LevelTwoData : LevelData
+    {
+        public LevelTwoData()
+        {
+            notes = new List<int> { 2, 5, 5, 5, 6, 5, 4, 5, 4, 3, 3 }; //Песня гены
+            delay = 400;
+            count = 0;
+        }
+    }
+
+    class LevelThreeData : LevelData
+    {
+        public LevelThreeData()
+        {
+            notes = new List<int> { 5, 4, 4, 5, 3, 3, 5, 4, 4, 2, 0, 5, 3 }; //Антонио
+            delay = 350;
+            count = 0;
+        }
+    }
+
+    class LevelFourData : LevelData
+    {
+        public LevelFourData()
+        {
+            notes = new List<int> { 4, 4, 5, 5, 2, 2, 4, 4, 4, 5, 5, 2, 2, 4 }; //Утята
+            delay = 300;
+            count = 0;
+        }
+    }
+
+    class LevelFiveData : LevelData
+    {
+        public LevelFiveData()
+        {
+            notes = new List<int> { 0, 2, 4, 5, 5, 5, 4, 2, 2, 2, 3, 2, 1 }; //Фиксики
+            delay = 250;
+            count = 0;
+        }
+    }
+
 }

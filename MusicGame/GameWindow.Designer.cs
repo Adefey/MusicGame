@@ -31,30 +31,39 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameWindow));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.noteLabel = new System.Windows.Forms.Label();
+            this.noteHintLabel = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.scoreHintLabel = new System.Windows.Forms.Label();
             this.gamePictureBox = new System.Windows.Forms.PictureBox();
             this.tickTimer = new System.Windows.Forms.Timer(this.components);
             this.noteGeneratorTimer = new System.Windows.Forms.Timer(this.components);
-            this.noteHintLabel = new System.Windows.Forms.Label();
-            this.noteLabel = new System.Windows.Forms.Label();
             this.delayTimer = new System.Windows.Forms.Timer(this.components);
+            this.nextLevelButton = new System.Windows.Forms.Button();
+            this.levelHintLabel = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.ColumnCount = 4;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.ColumnCount = 7;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel.Controls.Add(this.levelLabel, 5, 1);
+            this.tableLayoutPanel.Controls.Add(this.levelHintLabel, 4, 1);
             this.tableLayoutPanel.Controls.Add(this.noteLabel, 3, 1);
             this.tableLayoutPanel.Controls.Add(this.noteHintLabel, 2, 1);
             this.tableLayoutPanel.Controls.Add(this.scoreLabel, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.scoreHintLabel, 0, 1);
             this.tableLayoutPanel.Controls.Add(this.gamePictureBox, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.nextLevelButton, 6, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -65,14 +74,38 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(1904, 1041);
             this.tableLayoutPanel.TabIndex = 0;
             // 
+            // noteLabel
+            // 
+            this.noteLabel.AutoSize = true;
+            this.noteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.noteLabel.Location = new System.Drawing.Point(816, 988);
+            this.noteLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.noteLabel.Name = "noteLabel";
+            this.noteLabel.Size = new System.Drawing.Size(272, 53);
+            this.noteLabel.TabIndex = 6;
+            this.noteLabel.Text = "-";
+            this.noteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // noteHintLabel
+            // 
+            this.noteHintLabel.AutoSize = true;
+            this.noteHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.noteHintLabel.Location = new System.Drawing.Point(544, 988);
+            this.noteHintLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.noteHintLabel.Name = "noteHintLabel";
+            this.noteHintLabel.Size = new System.Drawing.Size(272, 53);
+            this.noteHintLabel.TabIndex = 5;
+            this.noteHintLabel.Text = "Играет нота:";
+            this.noteHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // scoreLabel
             // 
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scoreLabel.Location = new System.Drawing.Point(476, 988);
+            this.scoreLabel.Location = new System.Drawing.Point(272, 988);
             this.scoreLabel.Margin = new System.Windows.Forms.Padding(0);
             this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(476, 53);
+            this.scoreLabel.Size = new System.Drawing.Size(272, 53);
             this.scoreLabel.TabIndex = 3;
             this.scoreLabel.Text = "0";
             this.scoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,14 +117,14 @@
             this.scoreHintLabel.Location = new System.Drawing.Point(0, 988);
             this.scoreHintLabel.Margin = new System.Windows.Forms.Padding(0);
             this.scoreHintLabel.Name = "scoreHintLabel";
-            this.scoreHintLabel.Size = new System.Drawing.Size(476, 53);
+            this.scoreHintLabel.Size = new System.Drawing.Size(272, 53);
             this.scoreHintLabel.TabIndex = 2;
             this.scoreHintLabel.Text = "Ваш счет:";
             this.scoreHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gamePictureBox
             // 
-            this.tableLayoutPanel.SetColumnSpan(this.gamePictureBox, 4);
+            this.tableLayoutPanel.SetColumnSpan(this.gamePictureBox, 7);
             this.gamePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gamePictureBox.Location = new System.Drawing.Point(0, 0);
             this.gamePictureBox.Margin = new System.Windows.Forms.Padding(0);
@@ -103,6 +136,7 @@
             // 
             // tickTimer
             // 
+            this.tickTimer.Enabled = true;
             this.tickTimer.Interval = 15;
             this.tickTimer.Tick += new System.EventHandler(this.tickTimer_Tick);
             // 
@@ -111,33 +145,45 @@
             this.noteGeneratorTimer.Interval = 500;
             this.noteGeneratorTimer.Tick += new System.EventHandler(this.noteGeneratorTimer_Tick);
             // 
-            // noteHintLabel
-            // 
-            this.noteHintLabel.AutoSize = true;
-            this.noteHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noteHintLabel.Location = new System.Drawing.Point(952, 988);
-            this.noteHintLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.noteHintLabel.Name = "noteHintLabel";
-            this.noteHintLabel.Size = new System.Drawing.Size(476, 53);
-            this.noteHintLabel.TabIndex = 5;
-            this.noteHintLabel.Text = "Играет нота:";
-            this.noteHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // noteLabel
-            // 
-            this.noteLabel.AutoSize = true;
-            this.noteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noteLabel.Location = new System.Drawing.Point(1428, 988);
-            this.noteLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.noteLabel.Name = "noteLabel";
-            this.noteLabel.Size = new System.Drawing.Size(476, 53);
-            this.noteLabel.TabIndex = 6;
-            this.noteLabel.Text = "-";
-            this.noteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // delayTimer
             // 
             this.delayTimer.Interval = 200;
+            // 
+            // nextLevelButton
+            // 
+            this.nextLevelButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nextLevelButton.Location = new System.Drawing.Point(1632, 988);
+            this.nextLevelButton.Margin = new System.Windows.Forms.Padding(0);
+            this.nextLevelButton.Name = "nextLevelButton";
+            this.nextLevelButton.Size = new System.Drawing.Size(272, 53);
+            this.nextLevelButton.TabIndex = 7;
+            this.nextLevelButton.Text = "Играть";
+            this.nextLevelButton.UseVisualStyleBackColor = true;
+            this.nextLevelButton.Click += new System.EventHandler(this.nextLevelButton_Click);
+            // 
+            // levelHintLabel
+            // 
+            this.levelHintLabel.AutoSize = true;
+            this.levelHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.levelHintLabel.Location = new System.Drawing.Point(1088, 988);
+            this.levelHintLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.levelHintLabel.Name = "levelHintLabel";
+            this.levelHintLabel.Size = new System.Drawing.Size(272, 53);
+            this.levelHintLabel.TabIndex = 8;
+            this.levelHintLabel.Text = "Уровень:";
+            this.levelHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // levelLabel
+            // 
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.levelLabel.Location = new System.Drawing.Point(1360, 988);
+            this.levelLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(272, 53);
+            this.levelLabel.TabIndex = 9;
+            this.levelLabel.Text = "-";
+            this.levelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameWindow
             // 
@@ -169,5 +215,8 @@
         private System.Windows.Forms.Label noteLabel;
         private System.Windows.Forms.Label noteHintLabel;
         private System.Windows.Forms.Timer delayTimer;
+        private System.Windows.Forms.Button nextLevelButton;
+        private System.Windows.Forms.Label levelLabel;
+        private System.Windows.Forms.Label levelHintLabel;
     }
 }

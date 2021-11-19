@@ -24,7 +24,6 @@ namespace MusicGame
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
             RedrawOctave();
-            LevelFactory.currentLevel = 1;
             LevelFactory.maxLevel = PlayerInfo.difficulty;
         }
 
@@ -44,6 +43,7 @@ namespace MusicGame
 
         private void gamePictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            if (currentLevel == null) return;
             int pressedNote = (e.X / (bmp.Width / 7));
             if (pressedNote == currentLevel.notes[playerInputNum])
             {
@@ -67,17 +67,18 @@ namespace MusicGame
                 noteLabel.Text = "-";
             });
             scoreLabel.Text = score.ToString();
+            if (playerInputNum == currentLevel.notes.Count && LevelFactory.currentLevel == LevelFactory.maxLevel)
+            {
+                MessageBox.Show($"Играй пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                Close();
+                Dispose();
+            }
             if (playerInputNum == currentLevel.notes.Count)
             {
                 MessageBox.Show($"Уровень пройден", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 nextLevelButton_Click(sender, e);
             }
-            if (playerInputNum == currentLevel.notes.Count && LevelFactory.currentLevel == LevelFactory.maxLevel)
-            {
-                MessageBox.Show($"Играй пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                Close();            
-            }
-         
+
         }
 
         private void RedrawOctave()
@@ -126,7 +127,7 @@ namespace MusicGame
             }
             else
             {
-                noteGeneratorTimer.Enabled = false;                
+                noteGeneratorTimer.Enabled = false;
             }
         }
 

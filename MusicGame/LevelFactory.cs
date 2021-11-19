@@ -2,7 +2,8 @@
 {
     static class LevelFactory
     {
-        public static int currentLevel;
+        public static int currentLevel = 1;
+        private static int currentLocalLevel = 1; 
         public static int maxLevel;
 
         public static LevelData GetLevel(int levelNum)
@@ -20,12 +21,13 @@
 
         public static LevelData GetNext()
         {
-            int n = currentLevel;
-            if (currentLevel == maxLevel)
+            int n = currentLocalLevel;
+            currentLevel = currentLocalLevel;
+            if (currentLocalLevel == maxLevel)
             {
-                currentLevel = 1;
+                currentLocalLevel = 1;
             }
-            else currentLevel++;
+            else currentLocalLevel++;
             return GetLevel(n);
         }
     }

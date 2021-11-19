@@ -9,7 +9,6 @@ namespace MusicGame
         MIDIPlayer player = new MIDIPlayer();
         Random random = new Random();
         Graphics gfx;
-        Pen RandomPen;
         Brush RandomBrush;
         Pen UserCorrectClickPen = new Pen(Color.Green, 5);
         Pen UserBadClickPen = new Pen(Color.Red, 5);
@@ -22,7 +21,7 @@ namespace MusicGame
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
             tickTimer.Enabled = true;
-            noteGeneratorTimer.Enabled = true;
+            noteGeneratorTimer.Enabled = false;
             RedrawOctave();
         }
 
@@ -32,12 +31,12 @@ namespace MusicGame
             
             RedrawOctave();
             DrawNote(pressedNote);
-            PlayNote(pressedNote);
+            PlayNote(pressedNote, 2);
             noteLabel.Text = pressedNote.ToString();
-            playerNoteTImer.Enabled = true;
-            playerNoteTImer.Tick += new EventHandler((s, a) =>
+            delayTimer.Enabled = true;
+            delayTimer.Tick += new EventHandler((s, a) =>
             {
-                playerNoteTImer.Enabled = false;
+                delayTimer.Enabled = false;
                 RedrawOctave();
                 noteLabel.Text = "-";
             });
@@ -57,25 +56,31 @@ namespace MusicGame
             gfx.FillRectangle(RandomBrush, number * (bmp.Width / 7), 0, (bmp.Width / 7), bmp.Height);
         }
 
-        private void PlayNote(int number)
+        private void PlayNote(int number, int lane)
         {
-            player.Note(127, 50+number, 200, 1);
+            player.Note(127, 50+number, 200, lane);
         }
 
         private void tickTimer_Tick(object sender, EventArgs e)
         {
-            RandomPen = new Pen(Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)), 5);
             RandomBrush = new SolidBrush(Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)));
             gamePictureBox.Image = bmp;
         }
 
         private void noteGeneratorTimer_Tick(object sender, EventArgs e)
         {
-            //DrawOctave();
-            //int note = random.Next(7);
-            //noteLabel.Text = note.ToString();
-            //DrawNote(note);
-            //PlayNote(note);
+            int note = random.Next(7);
+            RedrawOctave();
+            DrawNote(note);
+            PlayNote(note, 1);
+            noteLabel.Text = note.ToString();
+            delayTimer.Enabled = true;
+            delayTimer.Tick += new EventHandler((s, a) =>
+            {
+                delayTimer.Enabled = false;
+                RedrawOctave();
+                noteLabel.Text = "-";
+            });
         }
     }
 }

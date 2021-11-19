@@ -38,7 +38,7 @@
             this.noteGeneratorTimer = new System.Windows.Forms.Timer(this.components);
             this.noteHintLabel = new System.Windows.Forms.Label();
             this.noteLabel = new System.Windows.Forms.Label();
-            this.playerNoteTImer = new System.Windows.Forms.Timer(this.components);
+            this.delayTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -135,9 +135,9 @@
             this.noteLabel.Text = "-";
             this.noteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // playerNoteTImer
+            // delayTimer
             // 
-            this.playerNoteTImer.Interval = 200;
+            this.delayTimer.Interval = 200;
             // 
             // GameWindow
             // 
@@ -168,6 +168,6 @@
         private System.Windows.Forms.Timer noteGeneratorTimer;
         private System.Windows.Forms.Label noteLabel;
         private System.Windows.Forms.Label noteHintLabel;
-        private System.Windows.Forms.Timer playerNoteTImer;
+        private System.Windows.Forms.Timer delayTimer;
     }
 }

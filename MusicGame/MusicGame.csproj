@@ -52,6 +52,8 @@
     <Compile Include="GameWindow.Designer.cs">
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelData.cs" />
+    <Compile Include="LevelFactory.cs" />
     <Compile Include="MainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>

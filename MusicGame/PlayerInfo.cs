@@ -10,6 +10,7 @@
         public static int HP = maxHP;
         public static int currentStage = 0;
         //0 - menu, 1 - first stage ...
+
         public static void Revive()
         {
             HP = maxHP;
@@ -21,9 +22,18 @@
             difficulty = newDifficulty;
         }
 
+        public static void ForgetPlayer()
+        {
+            name = "";
+            difficulty = 1;
+            score = 0;
+            HP = maxHP;
+            currentStage = 0;
+        }
+
         public static bool IsReady()
         {
-            if (name != null && currentStage == 0 && HP == maxHP && score == 0)
+            if (name != "" && currentStage == 0 && HP == maxHP && score == 0)
                 return true;
             return false;
         }

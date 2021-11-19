@@ -6,8 +6,9 @@ namespace MusicGame
 {
     internal class MIDIPlayer
     {
-        private int Handle = 0;
+        private static int CurrentHandle = 0;
 
+        private int Handle = 0;
         public int Acoustic_Grand_Piano = 1;
         public int Bright_Acoustic_Piano = 2;
         public int Electric_Grand_Piano = 3;
@@ -153,7 +154,9 @@ namespace MusicGame
 
         public MIDIPlayer()
         {
+            Handle = CurrentHandle;
             midiOutOpen(ref Handle, 0, null, 0, 0);
+            CurrentHandle++;
         }
 
         public async void Note(int Volume, int Frequency, int Duration, int Lane)
@@ -174,6 +177,7 @@ namespace MusicGame
         ~MIDIPlayer()
         {
             midiOutClose(Handle);
+            CurrentHandle--;
         }
     }
 }

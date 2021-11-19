@@ -19,8 +19,22 @@ namespace MusicGame
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            GameWindow gameWindow = new GameWindow();
-            gameWindow.Show();
+            PlayerInfo.SetPlayer(nameTextBox.Text, difficultyTrackBar.Value);
+            if (PlayerInfo.IsReady())
+            {
+                GameWindow gameWindow = new GameWindow();
+                gameWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Похоже, вы не ввели имя. Введите его, чтобы отображаться в списке лидеров", "Ошибка, введите данные", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            PlayerInfo.ForgetPlayer();
+            Close();
         }
     }
 }

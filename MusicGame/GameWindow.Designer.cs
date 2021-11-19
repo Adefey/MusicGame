@@ -34,7 +34,11 @@
             this.scoreLabel = new System.Windows.Forms.Label();
             this.scoreHintLabel = new System.Windows.Forms.Label();
             this.gamePictureBox = new System.Windows.Forms.PictureBox();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.tickTimer = new System.Windows.Forms.Timer(this.components);
+            this.noteGeneratorTimer = new System.Windows.Forms.Timer(this.components);
+            this.noteHintLabel = new System.Windows.Forms.Label();
+            this.noteLabel = new System.Windows.Forms.Label();
+            this.playerNoteTImer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +50,8 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.Controls.Add(this.noteLabel, 3, 1);
+            this.tableLayoutPanel.Controls.Add(this.noteHintLabel, 2, 1);
             this.tableLayoutPanel.Controls.Add(this.scoreLabel, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.scoreHintLabel, 0, 1);
             this.tableLayoutPanel.Controls.Add(this.gamePictureBox, 0, 0);
@@ -95,10 +101,43 @@
             this.gamePictureBox.TabStop = false;
             this.gamePictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gamePictureBox_MouseDown);
             // 
-            // timer
+            // tickTimer
             // 
-            this.timer.Interval = 50;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.tickTimer.Interval = 15;
+            this.tickTimer.Tick += new System.EventHandler(this.tickTimer_Tick);
+            // 
+            // noteGeneratorTimer
+            // 
+            this.noteGeneratorTimer.Interval = 500;
+            this.noteGeneratorTimer.Tick += new System.EventHandler(this.noteGeneratorTimer_Tick);
+            // 
+            // noteHintLabel
+            // 
+            this.noteHintLabel.AutoSize = true;
+            this.noteHintLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.noteHintLabel.Location = new System.Drawing.Point(952, 988);
+            this.noteHintLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.noteHintLabel.Name = "noteHintLabel";
+            this.noteHintLabel.Size = new System.Drawing.Size(476, 53);
+            this.noteHintLabel.TabIndex = 5;
+            this.noteHintLabel.Text = "Играет нота:";
+            this.noteHintLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // noteLabel
+            // 
+            this.noteLabel.AutoSize = true;
+            this.noteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.noteLabel.Location = new System.Drawing.Point(1428, 988);
+            this.noteLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.noteLabel.Name = "noteLabel";
+            this.noteLabel.Size = new System.Drawing.Size(476, 53);
+            this.noteLabel.TabIndex = 6;
+            this.noteLabel.Text = "-";
+            this.noteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // playerNoteTImer
+            // 
+            this.playerNoteTImer.Interval = 200;
             // 
             // GameWindow
             // 
@@ -125,6 +164,10 @@
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label scoreHintLabel;
         private System.Windows.Forms.PictureBox gamePictureBox;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer tickTimer;
+        private System.Windows.Forms.Timer noteGeneratorTimer;
+        private System.Windows.Forms.Label noteLabel;
+        private System.Windows.Forms.Label noteHintLabel;
+        private System.Windows.Forms.Timer playerNoteTImer;
     }
 }

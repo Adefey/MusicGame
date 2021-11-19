@@ -7,7 +7,7 @@ namespace MusicGame
     public partial class GameWindow : Form
     {
         MIDIPlayer player = new MIDIPlayer();
-        LevelData currentLevel = LevelFactory.GetLevel(1);
+        LevelData currentLevel;
         Random random = new Random();
         Graphics gfx;
         Brush RandomBrush;
@@ -22,6 +22,7 @@ namespace MusicGame
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
             RedrawOctave();
+            LevelFactory.currentLevel = 1;
         }
 
         private void SetLevel(int number = 0)
@@ -110,8 +111,8 @@ namespace MusicGame
         {
             noteGeneratorTimer.Enabled = true;
             nextLevelButton.Visible = false;
-            SetLevel();
             levelLabel.Text = LevelFactory.currentLevel.ToString();
+            SetLevel();            
         }
     }
 }

@@ -174,6 +174,11 @@ namespace MusicGame
             midiOutShortMsg(Handle, _Instrument << 8 | Lane << 0 | 0x000000C0);
         }
 
+        public void Close()
+        {
+            midiOutClose(Handle);
+        }
+
         ~MIDIPlayer()
         {
             midiOutClose(Handle);

@@ -69,11 +69,12 @@ namespace MusicGame
             scoreLabel.Text = score.ToString();
             if (playerInputNum == currentLevel.notes.Count && LevelFactory.currentLevel == LevelFactory.maxLevel)
             {
-                MessageBox.Show($"Играй пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show($"Игра пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Close();
                 Dispose();
+                player.Close();
             }
-            if (playerInputNum == currentLevel.notes.Count)
+            else if (playerInputNum == currentLevel.notes.Count)
             {
                 MessageBox.Show($"Уровень пройден", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 nextLevelButton_Click(sender, e);
@@ -135,9 +136,9 @@ namespace MusicGame
         {
             playerInputNum = 0;
             noteGeneratorTimer.Enabled = true;
-            nextLevelButton.Visible = false;
-            levelLabel.Text = LevelFactory.currentLevel.ToString();
+            nextLevelButton.Visible = false;            
             SetLevel();
+            levelLabel.Text = LevelFactory.currentLevel.ToString();
         }
     }
 }

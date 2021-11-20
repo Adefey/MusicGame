@@ -14,7 +14,7 @@ namespace MusicGame
         public LevelOneData()
         {
             notes = new List<int> { 1 }; //В лесу родилас елочка  0, 5, 5, 4, 5, 3, 0, 0
-            delay = 450;
+            delay = 400;
             count = 0;
         }
     }
@@ -24,7 +24,7 @@ namespace MusicGame
         public LevelTwoData()
         {
             notes = new List<int> { 2 }; //Песня гены 2, 5, 5, 5, 6, 5, 4, 5, 4, 3, 3
-            delay = 400;
+            delay = 375;
             count = 0;
         }
     }
@@ -44,7 +44,7 @@ namespace MusicGame
         public LevelFourData()
         {
             notes = new List<int> { 4 }; //Утята 4, 4, 5, 5, 2, 2, 4, 4, 4, 5, 5, 2, 2, 4
-            delay = 300;
+            delay = 325;
             count = 0;
         }
     }
@@ -54,7 +54,7 @@ namespace MusicGame
         public LevelFiveData()
         {
             notes = new List<int> { 5 }; //Фиксики 0, 2, 4, 5, 5, 5, 4, 2, 2, 2, 3, 2, 1
-            delay = 250;
+            delay = 300;
             count = 0;
         }
     }

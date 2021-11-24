@@ -19,6 +19,11 @@
             }
         }
 
+        public static void SetStart()
+        {
+            currentLocalLevel = 1;
+        }
+
         public static LevelData GetNext()
         {
             int n = currentLocalLevel;

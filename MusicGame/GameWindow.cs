@@ -6,7 +6,7 @@ namespace MusicGame
 {
     public partial class GameWindow : Form
     {
-        MIDIPlayer player = new MIDIPlayer();
+        MIDIPlayer player;
         LevelData currentLevel;
         int score = 0;
         int playerInputNum = 0;
@@ -23,6 +23,8 @@ namespace MusicGame
             InitializeComponent();
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
+            player = new MIDIPlayer();
+            LevelFactory.SetStart();
             RedrawOctave();
             LevelFactory.maxLevel = PlayerInfo.difficulty;
         }
@@ -54,6 +56,7 @@ namespace MusicGame
             {
                 MessageBox.Show($"Игра окончена. {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
+                return;
             }
             RedrawOctave();
             DrawNote(pressedNote);
@@ -79,7 +82,6 @@ namespace MusicGame
                 MessageBox.Show($"Уровень пройден", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 nextLevelButton_Click(sender, e);
             }
-
         }
 
         private void RedrawOctave()

@@ -20,9 +20,9 @@ namespace MusicGame
 
         public GameWindow()
         {
+            player = new MIDIPlayer();
             InitializeComponent();
             Size = Screen.PrimaryScreen.Bounds.Size;
-            player = new MIDIPlayer();
             bmp = new Bitmap(gamePictureBox.Width, gamePictureBox.Height);
             gfx = Graphics.FromImage(bmp);
             LevelFactory.SetStart();
@@ -75,7 +75,6 @@ namespace MusicGame
             {
                 MessageBox.Show($"Игра пройдена!  {PlayerInfo.name}, ваш счет: {score}", "Результаты", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Close();
-                Dispose();
             }
             else if (playerInputNum == currentLevel.notes.Count)
             {
@@ -141,6 +140,11 @@ namespace MusicGame
             nextLevelButton.Visible = false;            
             SetLevel();
             levelLabel.Text = LevelFactory.currentLevel.ToString();
+        }
+
+        private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            player.Close();
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace MusicGame
 {
-    internal class MIDIPlayer
+    internal class MIDIPlayer //Класс дл яудобного использования MIDI. Этот класс работает без дополнительных библиотек, использует только средства системы
     {
         private static int CurrentHandle = 0;
 
         private int Handle = 0;
-        public int Acoustic_Grand_Piano = 1;
+        public int Acoustic_Grand_Piano = 1; //Здесь и дальше - это названия доступных инструментов и их номера. Не реализована смена инструмента
         public int Bright_Acoustic_Piano = 2;
         public int Electric_Grand_Piano = 3;
         public int Honky_tonk_Piano = 4;
@@ -138,7 +138,7 @@ namespace MusicGame
         public int Applause = 127;
         public int Gunshot = 128;
 
-        [DllImport("winmm.dll")]
+        [DllImport("winmm.dll")] //импорт функций из системных библиотек
         private static extern int midiOutOpen(ref int handle,
             int deviceID, MidiCallBack proc, int instance, int flags);
 
@@ -152,16 +152,16 @@ namespace MusicGame
         private delegate void MidiCallBack(int handle, int msg,
             int instance, int param1, int param2);
 
-        public MIDIPlayer()
+        public MIDIPlayer() //Конструктор открывает миди устройство по Handle
         {
             Handle = CurrentHandle;
             midiOutOpen(ref Handle, 0, null, 0, 0);
             CurrentHandle++;
         }
 
-        public async void Note(int Volume, int Frequency, int Duration, int Lane)
+        public async void Note(int Volume, int Frequency, int Duration, int Lane) //метод играет одну ноту с выбранной громкостью, частотой (высотой?), длительностью на выбранной линии.
         {
-            await Task.Run(() =>
+            await Task.Run(() => //метод асинхронный 
             {
                 midiOutShortMsg(Handle, Volume << 16 | Frequency << 8 | Lane << 0 | 0x00000090);
                 Thread.Sleep(Duration);
@@ -169,17 +169,17 @@ namespace MusicGame
             });
         }
 
-        public void SetInstrument(int _Instrument, int Lane)
+        public void SetInstrument(int _Instrument, int Lane) //Настроить инструмент по линии
         {
             midiOutShortMsg(Handle, _Instrument << 8 | Lane << 0 | 0x000000C0);
         }
 
-        public void Close()
+        public void Close() //Закрыть MIDI устройство
         {
             midiOutClose(Handle);
         }
 
-        ~MIDIPlayer()
+        ~MIDIPlayer() //деструктор закрывает устройство и уменьшает счетчик текущих устройств.
         {
             midiOutClose(Handle);
             CurrentHandle--;

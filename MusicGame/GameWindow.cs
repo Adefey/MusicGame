@@ -6,19 +6,21 @@ namespace MusicGame
 {
     public partial class GameWindow : Form
     {
-        MIDIPlayer player;
-        LevelData currentLevel;
-        int score = 0;
-        int playerInputNum = 0;
-        Random random = new Random();
-        Graphics gfx;
-        Brush RandomBrush;
+        MIDIPlayer player; //то, что играет звук
+        LevelData currentLevel; //Текущий уровень
+        int score = 0; //Очки, лучше бы я использовал очки от PlayerInfo
+        int playerInputNum = 0; //введенная клавиша пользователем.
+        Random random = new Random(); //Генератор псевдослучайных чисел для разноцветных клавиш
+        Graphics gfx; //Графика
+        //Кисти и прочее
+        Brush RandomBrush; 
         Pen UserCorrectClickPen = new Pen(Color.Green, 5);
         Pen UserBadClickPen = new Pen(Color.Red, 5);
         Pen BlackPen = new Pen(Color.Black, 5);
+        //Полотно для рисования
         Bitmap bmp;
 
-        public GameWindow()
+        public GameWindow() //Конструктор включает звук, задает размер окна, настраивает графику и выбирает уровень
         {
             player = new MIDIPlayer();
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace MusicGame
             LevelFactory.maxLevel = PlayerInfo.difficulty;
         }
 
-        private void SetLevel(int number = 0)
+        private void SetLevel(int number = 0) //Вызывает следующий уровень, или тот который введен
         {
             if (number == 0)
             {
@@ -44,7 +46,7 @@ namespace MusicGame
             }
         }
 
-        private void gamePictureBox_MouseDown(object sender, MouseEventArgs e)
+        private void gamePictureBox_MouseDown(object sender, MouseEventArgs e) //Событие на нажатие клавиш. Метод очень громоздкий, тут и обработка нажатия клавиш, и проверка результатов уровня, и звук. Лучше бы я перенес все это в другое место
         {
             if (currentLevel == null) return;
             int pressedNote = (e.X / (bmp.Width / 7));
@@ -62,9 +64,9 @@ namespace MusicGame
             RedrawOctave();
             DrawNote(pressedNote);
             PlayNote(pressedNote, 2);
-            noteLabel.Text = pressedNote.ToString();
+            noteLabel.Text = (pressedNote+1).ToString();
             delayTimer.Enabled = true;
-            delayTimer.Tick += new EventHandler((s, a) =>
+            delayTimer.Tick += new EventHandler((s, a) => //Оригинальный метод поставить паузу, при этом не вешая поток
             {
                 delayTimer.Enabled = false;
                 RedrawOctave();
@@ -83,7 +85,7 @@ namespace MusicGame
             }
         }
 
-        private void RedrawOctave()
+        private void RedrawOctave() //Перерисовать ноты
         {
             gfx.Clear(Color.White);
             for (int x = 0; x < bmp.Width; x += bmp.Width / 7)
@@ -92,23 +94,23 @@ namespace MusicGame
             }
         }
 
-        private void DrawNote(int number) //Начинаются от нуля
+        private void DrawNote(int number) //Начинаются от нуля. Нарисовать ноту
         {
             gfx.FillRectangle(RandomBrush, number * (bmp.Width / 7), 0, (bmp.Width / 7), bmp.Height);
         }
 
-        private void PlayNote(int number, int lane)
+        private void PlayNote(int number, int lane) //Сыграть ноту
         {
             player.Note(127, 60 + number, 200, lane);
         }
 
-        private void tickTimer_Tick(object sender, EventArgs e)
+        private void tickTimer_Tick(object sender, EventArgs e) //Рандомные цвета выбираются регулярно с некоторой частотой. Также с этой частотой обновляется изображение на экране
         {
             RandomBrush = new SolidBrush(Color.FromArgb(random.Next(255), random.Next(255), random.Next(255)));
             gamePictureBox.Image = bmp;
         }
 
-        private void noteGeneratorTimer_Tick(object sender, EventArgs e)
+        private void noteGeneratorTimer_Tick(object sender, EventArgs e) //Этот таймер вызывает нажатие клавиш мелодии уровня
         {
             int note;
             if (LevelData.count < currentLevel.notes.Count)
@@ -118,7 +120,7 @@ namespace MusicGame
                 RedrawOctave();
                 DrawNote(note);
                 PlayNote(note, 1);
-                noteLabel.Text = note.ToString();
+                noteLabel.Text = (note+1).ToString();
                 delayTimer.Enabled = true;
                 delayTimer.Tick += new EventHandler((s, a) =>
                 {
@@ -133,7 +135,7 @@ namespace MusicGame
             }
         }
 
-        private void nextLevelButton_Click(object sender, EventArgs e)
+        private void nextLevelButton_Click(object sender, EventArgs e) //КНопка для запуска игры
         {
             playerInputNum = 0;
             noteGeneratorTimer.Enabled = true;
@@ -144,7 +146,7 @@ namespace MusicGame
 
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            player.Close();
+            player.Close(); //При закрытии формы закрывается музыкальный плеер.
         }
     }
 }
